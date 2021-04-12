@@ -1,0 +1,31 @@
+<style>
+    .myheader{
+        color: #B22222;
+        vertical-align: middle;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 3vw;
+    }
+    .mymission{
+        font-family:georgia,garamond,serif;
+        font-size: 20;
+    }
+    .tipheader{
+        color: #B22222;
+        vertical-align: middle;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 18;
+    }
+    .tips{
+        font-family:georgia,garamond,serif;
+        font-size: 15; 
+    }
+</style>
+{%extends "blog/base.html"%}
+{%block content%}
+<h1 class="myheader"><u><b>MISSION STATEMENT</b></u></h1>
+<p class="mymission">Our mission is to provide people with a secure and easy way to protect and access their valuable assests. Facial recognition technology is becoming increasingly stronger with the rising interest in computer vision. We are striving to leverage this emerging technology to provide a better user experience than more traditional locks such as combination locks which have a history of being irritating.
+</p>
+{%if not user.is_authenticated%}
+<a class="btn" style="color: black; background-color:#5f788a; margin-bottom: 25px; " href="{%url 'login'%}"><b> Access Your Box Here!</b></a>
+{%endif%}
+{%endblock content%}

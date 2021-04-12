@@ -1,0 +1,99 @@
+<style>
+    .mycontainer{
+        border: 1px solid grey;
+    }
+    .myimage-lg{
+        /* height:200px ;  */
+        width: 200px;
+        height: auto;
+        /* width: 200px;  */
+        /* height:82%; */
+        /* width: 82%; */
+        margin: 5px;
+        border: 3px solid maroon;
+    }
+    @media (max-width: 800px){.myimage-sm{
+        height: 15vh;
+        /* both used to be set to 82% */
+        width: auto;
+        margin: 5px;
+        border: 2px solid maroon;
+        margin-right: 10px;
+    }
+    }
+    .mybuttons{
+        margin: 5px;
+        background-color: teal;
+        color: black;
+    }
+    .attributestext{
+        font-family:cursive;
+        font-size: 17 auto;
+    }
+    .profile-name{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
+        color: maroon;
+    }
+    .pictures{
+        height: 200px;
+        border: 5px solid blanchedalmond;
+        margin-bottom: 10px;
+    }
+</style>
+
+{%extends "blog/base.html"%}
+{%block content%}
+<h4 class="profile-name"><u>People with access to {{user.profile.first_name}} {{user.profile.last_name}}'s Box</u></h4>
+
+<hr>
+<div class="col">
+    <a href="{%url 'updateprofile'%}"><button class='btn btn-outline-info'>Add/Remove People</button></a>
+</div>
+<hr>
+<div class="row">
+
+<div class="media">
+    {%if user.profile.image_one%}
+        <img class='mr-3 pictures' src="{{user.profile.image_one.url}}" alt=""> 
+        <!-- could add a tag with href same as source so that you can open image in browser for a better view consider this -->
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_two%}
+        <img class='mr-3 pictures' src="{{user.profile.image_two.url}}" alt="">  
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_three%}
+        <img class='mr-3 pictures' src="{{user.profile.image_three.url}}" alt="">  
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_four%}
+        <img class='mr-3 pictures' src="{{user.profile.image_four.url}}" alt="">  
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_five%}
+        <img class='mr-3 pictures' src="{{user.profile.image_five.url}}" alt="">  
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_six%}
+        <img class='mr-3 pictures' src="{{user.profile.image_six.url}}" alt="">  
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_seven%}
+        <img class='mr-3 pictures' src="{{user.profile.image_seven.url}}" alt="">  
+    {%endif%}
+</div>
+<div class="media">
+    {%if user.profile.image_eight%}
+        <img class='mr-3 pictures' src="{{user.profile.image_eight.url}}" alt="">  
+    {%endif%}
+</div>
+</div>
+
+
+{%endblock content%}

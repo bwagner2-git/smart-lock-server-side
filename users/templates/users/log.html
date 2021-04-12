@@ -1,0 +1,54 @@
+<style>
+    .mycontainer{
+        border: 1px solid grey;
+    }
+    .myimage-lg{
+        /* height:200px ;  */
+        width: 200px;
+        height: auto;
+        /* width: 200px;  */
+        /* height:82%; */
+        /* width: 82%; */
+        margin: 5px;
+        border: 3px solid maroon;
+    }
+    @media (max-width: 800px){.myimage-sm{
+        height: 15vh;
+        /* both used to be set to 82% */
+        width: auto;
+        margin: 5px;
+        border: 2px solid maroon;
+        margin-right: 10px;
+    }
+    }
+    .mybuttons{
+        margin: 5px;
+        background-color: teal;
+        color: black;
+    }
+    .attributestext{
+        font-family:cursive;
+        font-size: 17 auto;
+    }
+    .profile-name{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
+        color: maroon;
+    }
+    .pictures{
+        height: 200px;
+        border: 5px solid blanchedalmond;
+        margin-bottom: 10px;
+    }
+</style>
+
+{%extends "blog/base.html"%}
+{%block content%}
+<h4 class="profile-name"><u>{{user.profile.first_name}} {{user.profile.last_name}}'s Time Log</u></h4>
+<ul>
+    {%for time in times%}
+        <li>{{time}}</li>
+    {%endfor%}
+</ul>
+
+
+{%endblock content%}

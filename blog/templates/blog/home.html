@@ -1,0 +1,105 @@
+<style>
+    .article-img {
+        height: 65px;
+        width: 65px;
+        margin-right: 16px;
+    }
+
+    .myheader {
+        color: #B22222;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 30pt;
+    }
+    .myimage{
+        /* width: 80%; */
+        margin: auto;
+    }
+    @media (max-width: 767px) {
+    .phone-container {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x:scroll;
+    }
+}
+</style>
+
+{%extends "blog/base.html"%}
+{%block content%}
+<div class="row">
+    <h2 class="myheader"><b>Welcome to the Wall</b></h2>
+</div>
+    <div class="row">
+        <a href="{%url 'post-create'%}">
+        <button class='btn btn-outline-info' style=" vertical-align: bottom;">Add a Post</button>
+    </a>
+    </div>
+
+<hr>
+<!-- works outside of here -->
+
+{%if sponsored_post %}
+<article class="media content-section">
+    <img class="article-img " style="width: 35%; height: auto;" src="{{sponsored_post.image.url}}" alt="">
+    <div class="media-body" >
+        <div class="article-metadata text-center text-muted">
+            Advertisment
+        </div>
+        <h2>{{ sponsored_post.company}}</h2>
+        <p class="article-content">{{ sponsored_post.content }}</p>
+    </div>
+</article>
+{%endif%}
+<!-- try it with a container to get everything centered look to explore page... include lg also so that it will resize appropriately -->
+
+
+
+<!-- works bottom -->
+{%for post in posts%}
+<article class="media content-section phone-container">
+    <img class="rounded-circle article-img" src="{{post.author.profile.image.url}}" alt="">
+    <div class="media-body" >
+        <div class="article-metadata">
+            <a class="mr-2" href="view/{{post.author.profile.slug}}">{{ post.author}}</a>
+            <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
+        </div>
+        <h2><a class="article-title">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
+        <!-- works up to here -->
+        {%if post.author == user%}
+        <div class="row" style="text-align: center;">
+            <a href="{%url 'post-update' post.id%}"><button class='btn btn-outline-info'
+                    style="padding: 3px; margin-left: 14px;">Edit</button></a>
+            <a href="{%url 'post-delete' post.id%}"><button class='btn btn-outline-info'
+                    style="padding: 3px; margin-left: 5px;">Delete</button></a>
+
+        </div>
+        {%endif%}
+        <!-- bottom of the new edit -->
+    </div>
+</article>
+{%endfor%}
+
+{% if posts.has_other_pages %}
+    {% if posts.has_previous %}
+        {%if posts.number != 2%}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        {%endif%}
+        <a class="btn btn-outline-info mb-4" href="?page={{post.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    {% for num in posts.paginator.page_range %}
+      {% if posts.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{num}}">{{num}}</a>
+      {% elif num > posts.number|add:"-3" and num < posts.number|add:"3" %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %} 
+    {% endfor %}
+
+    {% if posts.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{posts.next_page_number}}">Next</a>
+    {% endif %}
+
+{% endif %}
+
+{%endblock content%}
